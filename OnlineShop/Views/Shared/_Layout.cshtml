@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Онлайн-магазин одежды</title>
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="head">
+                <div class="logo">
+                    <a href="index.html"><img src="~/Content/images/layer/logo.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="header-top">
+            <div class="container">
+                <div class="col-sm-5 col-md-offset-2  header-login">
+                   @Html.Partial("_LoginPartial")
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+        <div class="head-top">
+           
+            <div class="col-sm-8 col-md-offset-2 h_menu4">
+                <nav class="navbar nav_bottom" role="navigation">
+
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header nav_2">
+                        <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                            <ul class="nav navbar-nav nav_1">
+                                <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
+
+                                <li class="dropdown mega-dropdown active">
+                                    @Styles.Render("~/Content/menu")
+                                    @Styles.Render("~/bundles/menu")
+                                    <a class="color1" href="#" data-toggle="dropdown"  class="dropdown-toggle">@Html.Label("Для женщин")<span class="caret"></span></a>
+                                        <div class="dropdown-menu ">
+                                            <div class="menu-top">
+                                                <div class="col1">
+                                                    <div class="h_nav">
+                                                        <h4>@Html.Label("Одежда")</h4>
+                                                        <ul>
+                                                            <li>@Html.ActionLink("Фубтолки и поло", "Index", "Products", new { subcategory="Футболки и поло"}, null)</li>
+                                                            <li>@Html.ActionLink("Платья и сарафаны", "Index", "Home")</li>
+                                                            <li>@Html.ActionLink("Брюки", "Index", "Home")</li>
+                                                            <li>@Html.ActionLink("Юбки", "Index", "Home")</li>
+                                                            <li>@Html.ActionLink("Джинсы", "Index", "Home")</li>
+                                                            <li>@Html.ActionLink("Пиджаки и костюмы", "Index", "Home")</li>
+                                                            <li>@Html.ActionLink("Блузы, рубашки", "Index", "Home")</li>
+                                                            <li>@Html.ActionLink("Свитера", "Index", "Home")</li>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col1">
+                                                    <div class="h_nav">
+                                                        <h4>@Html.Label("Аксессуары")</h4>
+                                                        <ul>
+                                                            <li>@Html.ActionLink("Сумки и рюкзаки", "Index", "Home")</li>
+                                                            <li>@Html.ActionLink("Головные уборы", "Index", "Home")</li>
+                                                            <li>@Html.ActionLink("Кошельки", "Index", "Home")</li>
+                                                            <li>@Html.ActionLink("Очки", "Index", "Home")</li>
+                                                            <li>@Html.ActionLink("Украшения, часы", "Index", "Home")</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                         
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="dropdown mega-dropdown active">
+                                    <a class="color2" href="#" class="dropdown-toggle" data-toggle="dropdown">@Html.Label("Для мужчин")<span class="caret"></span></a>
+                                    <div class="dropdown-menu mega-dropdown-menu">
+                                        <div class="menu-top">
+                                            <div class="col1">
+                                                <div class="h_nav">
+                                                    <h4>@Html.Label("Одежда")</h4>
+                                                    <ul>
+                                                        <li>@Html.ActionLink("Фубтолки, майки", "Index", "Home")</li>
+                                                        <li>@Html.ActionLink("Брюки", "Index", "Home")</li>
+                                                        <li>@Html.ActionLink("Джинсы", "Index", "Home")</li>
+                                                        <li>@Html.ActionLink("Пиджаки и костюмы", "Index", "Home")</li>
+                                                        <li>@Html.ActionLink("Рубашки, поло", "Index", "Home")</li>
+                                                        <li>@Html.ActionLink("Брюки", "Index", "Home")</li>
+                                                        <li>@Html.ActionLink("Свитера", "Index", "Home")</li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col1">
+                                                <div class="h_nav">
+                                                    <h4>@Html.Label("Аксессуары")</h4>
+                                                    <ul>
+                                                        <li>@Html.ActionLink("Сумки и рюкзаки", "Index", "Home")</li>
+                                                        <li>@Html.ActionLink("Головные уборы", "Index", "Home")</li>
+                                                        <li>@Html.ActionLink("Кошельки", "Index", "Home")</li>
+                                                        <li>@Html.ActionLink("Очки", "Index", "Home")</li>
+                                                        <li>@Html.ActionLink("Часы", "Index", "Home")</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="color3">@Html.ActionLink("Про магазин", "Index", "Home")</li>
+                                <li class="color4"> @Html.ActionLink("Контакты", "Index", "Home")</li>
+                                
+                            </ul>
+                        </div>
+                        </div>
+                </nav>
+                </div>
+            @Styles.Render("~/Content/css")
+            @Scripts.Render("~/bundles/vendors")
+
+
+
+            
+           @RenderSection("search", false)
+                <div class="cart box_1">
+                    <a href="checkout.html">
+                        <h3>
+                            <div class="total">
+                                <span class="simpleCart_total"> @Html.ActionLink("Корзина", "Index", "Home")</span>
+                            </div>
+                            <img src="~/Content/images/layer/cart.png" alt="" />
+                        </h3>
+                    </a>
+                    <p><a href="javascript:;" class="simpleCart_empty"></a></p>
+
+                </div>
+                <div class="clearfix"> </div>
+            
+                <!----->
+            </div>
+        <div id="results"></div>
+        @RenderBody()
+            <div class="clearfix"></div>
+            </div>
+   
+    
+            
+ 
+    
+        
+                                
+    <!--//footer-->
+    <div class="footer">
+        <div class="footer-middle">
+            <div class="container">
+
+                <div class="col-md-3 footer-middle-in">
+                    <h6>@Html.Label("Информация")</h6>
+                    <ul class="in">
+                        <li>@Html.ActionLink("Про магазин", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Контакты", "Index", "Home")</li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-3 footer-middle-in">
+                    <h6>@Html.Label("Бренды")</h6>
+                    <ul class="tag-in">
+                        <li><a href="#">Lorem</a></li>
+                        <li><a href="#">Sed</a></li>
+                        <li><a href="#">Ipsum</a></li>
+                        <li><a href="#">Contrary</a></li>
+                        <li><a href="#">Chunk</a></li>
+                        <li><a href="#">Amet</a></li>
+                        <li><a href="#">Omnis</a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p class="footer-class">&copy; Создано Коваленко Е.В., @DateTime.Today.Year </p>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <!--//footer-->
+</body>
+</html>

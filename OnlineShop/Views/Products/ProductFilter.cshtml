@@ -1,0 +1,56 @@
+﻿@using OnlineShop.Models
+@using OnlineShop.Helpers
+
+@model CatalogViewModel
+
+
+        <div class="col-md-9">
+            <div class="btn-group">
+                @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x }))
+            </div>
+            <div class="mid-popular">
+                <div id="results">
+
+                    @foreach (var item in Model.Products)
+                    {
+
+                        <div class="col-md-4 item-grid1 simpleCart_shelfItem">
+                            <div class="mid-pop">
+                                <div class="pro-img">
+                                    <img src=@item.Images[0].Substring(1).Insert(0, "../..") class="img-responsive" alt="">
+                                    <div class="zoom-icon ">
+                                        <a class="picture b-link-stripe b-animate-go  thickbox" href="@item.Images[0].Substring(1)" rel="title"><i class="glyphicon glyphicon-search icon "></i></a>
+                                        <a class="picture b-link-stripe b-animate-go  thickbox" href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>
+                                    </div>
+                                </div>
+                                <div class="mid-1">
+                                    <div class="women">
+                                        <div class="women-top">
+                                            <span>@Html.DisplayFor(model => item.Catalog)</span>
+                                            <h6>@Html.ActionLink(@item.Title, "ProductInfo", new { product = item })</h6>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="mid-2">
+                                        <p>
+                                            @if (@item.Discount > 0)
+                                            {<label>@item.PriceWithoutDiscount грн</label>}<em class="item_price">@Html.DisplayFor(model => item.Price)</em>
+                                        </p>
+                                        <div class="img item_add">
+                                            <a href="#"><img src="~/Content/images/layer/ca.png" alt=""></a>
+                                        </div>
+                                        <div class="block">
+                                            <div class="starbox small ghosting"> </div>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>

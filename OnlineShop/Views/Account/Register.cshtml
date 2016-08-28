@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Регистрация";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using OnlineShop.Models
+
+@model RegistrationViewModel
+
+<div class="container">
+    <div class="login">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+        {
+            <div id="wrong"><b>
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(false)
+</b></div>
+                
+                <br/>
+                <br/>
+                <div class="col-md-6 login-do">
+                    @Html.DisplayNameFor(m => m.UserName)
+                    <div class="login-mail">
+
+                        @Html.TextBoxFor(m => m.UserName)
+                        <i class="glyphicon glyphicon-user"></i>
+                    </div>
+                    @Html.DisplayNameFor(m => m.Email)
+                    <div class="login-mail">
+
+                        @Html.TextBoxFor(m => m.Email)
+                        <i class="glyphicon glyphicon-envelope"></i>
+                    </div>
+                    @Html.DisplayNameFor(m => m.Password)
+                    <div class="login-mail">
+                        @Html.PasswordFor(m => m.Password)
+                        <i class="glyphicon glyphicon-lock"></i>
+                    </div>
+                    @Html.DisplayNameFor(m => m.ConfirmPassword)
+                    <div class="login-mail">
+                        @Html.PasswordFor(m => m.ConfirmPassword)
+                        <i class="glyphicon glyphicon-lock"></i>
+                    </div>
+                    @Html.DisplayNameFor(m => m.FirstName)
+                    <div class="login-mail">
+
+                        @Html.TextBoxFor(m => m.FirstName)
+                        <i class="glyphicon glyphicon-user"></i>
+                    </div>
+                    @Html.DisplayNameFor(m => m.LastName)
+                    <div class="login-mail">
+
+                        @Html.TextBoxFor(m => m.LastName)
+                        <i class="glyphicon glyphicon-user"></i>
+                    </div>
+                    <label class="hvr-skew-backward">
+                        <input type="submit" value="Submit">
+                    </label>
+                    <div class="clearfix"> </div>
+                </div>
+                }
+                <div class="col-md-6 login-right">
+
+                    <div class="col-md-6 login-right">
+                        <p>
+                            Если Вы уже зарегистрированы, можете воспользоваться входом
+                        </p>
+                        @Html.ActionLink("Войти", "Login", null, new { @class = "hvr-skew-backward" })
+
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+
+            </div>
+
+</div>
+
+<br/>
+<br/>
+<br/>

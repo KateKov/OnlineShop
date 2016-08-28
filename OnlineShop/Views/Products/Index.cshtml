@@ -1,0 +1,178 @@
+﻿
+@{
+    ViewBag.Title = "Продукция";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using OnlineShop.Models
+@using OnlineShop.Helpers
+
+@model CatalogViewModel
+
+
+<!--content-->
+<div class="product">
+    <div class="container">
+        <div id="filters">
+            <div class="col-md-9">
+                <div class="btn-group">
+                    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x }))
+                </div>
+                <div class="mid-popular">
+                    <div id="results">
+
+                        @foreach (var item in Model.Products)
+                        {
+
+                            <div class="col-md-4 item-grid1 simpleCart_shelfItem">
+                                <div  class="mid-pop">
+                                    <div class="pro-img">
+                                        <img src=@item.Images[0].Substring(1).Insert(0, "../..") class="img-responsiv" alt="">
+                                        <div class="zoom-icon ">
+                                            <a class="picture b-link-stripe b-animate-go  thickbox" href="@item.Images[0].Substring(1)" rel="title"><i class="glyphicon glyphicon-search icon "></i></a>
+                                            <a class="picture b-link-stripe b-animate-go  thickbox" href="@item.Id.ToString().Insert(0, "/Products/ProductInfo/")"><i class="glyphicon glyphicon-menu-right icon"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="mid-1">
+                                        <div class="women">
+                                            <div class="women-top">
+                                                <span>@Html.DisplayFor(model => item.Catalog)</span>
+                                                <h6>@Html.ActionLink(@item.Title, "ProductInfo", "Products", new { id = @item.Id.ToString() }, null)</h6>
+                                            </div>
+
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="mid-2">
+                                            <p>
+                                                @if (@item.Discount > 0)
+                                                {<label>@item.PriceWithoutDiscount грн</label>}<em class="item_price">@Html.DisplayFor(model => item.Price)</em>
+                                            </p>
+                                          
+                                            <div class="block">
+                                                <div class="starbox small ghosting"> </div>
+                                            </div>
+                                            <div class="img item_add">
+                                                <a href="@item.Id.ToString().Insert(0, "/Products/ProductInfo/")"> <img src="~/Content/images/layer/ca.png" alt=""></a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="col-md-3 product-bottom">
+
+
+            
+            
+            @using (Ajax.BeginForm("ProductFilter", "Products", new AjaxOptions { UpdateTargetId = "filters" }))
+            {
+                <div class="sort">
+                        @Html.Label("Сортирова по")
+                        <br />
+                        <div>
+                            @Html.EnumDropDownListFor(m=>m.Sort)
+                            <a href=""><img src="~/Content/images/layer/arrow2.gif" alt="" class="v-middle"></a>
+                        </div>
+                </div>
+                <section class="sky-form">
+                    <h4 class="cate">Скидки</h4>
+                    <div class="row row1 scroll-pane">
+                        <div class="col col-4">
+                            @for (int i = 0; i < Model.DiscountRange.Count; i++)
+                            {
+
+                                @Html.CheckBoxFor(m => m.DiscountRange[i].Checked, new { id = "discount" })
+                                @Html.HiddenFor(m => m.DiscountRange[i].Text)
+                                @Html.DisplayFor(m => m.DiscountRange[i].Text)
+
+                                <br />
+                                <br/>
+                            }
+                        </div>
+                    </div>
+                </section>
+
+
+                <section class="sky-form">
+                    <h4 class="cate">Цена</h4>
+                    <div class="row row1 scroll-pane">
+                        <div class="col col-4">
+                            @for (int i = 0; i < Model.PriceRange.Count; i++)
+                            {
+                                @Html.CheckBoxFor(m => m.PriceRange[i].Checked, new { id = "price" })
+                                @Html.HiddenFor(m => m.PriceRange[i].Text)
+                                @Html.DisplayFor(m => m.PriceRange[i].Text)
+                                <br/>
+                                <br/>
+                            }
+                        </div>
+                    </div>
+                </section>
+                <section class="sky-form">
+                    <h4 class="cate">Цвета</h4>
+                    <div class="row row1 scroll-pane">
+                        <div class="col col-4">
+                            @for (int i = 0; i < Model.Colors.Count; i++)
+                            {
+                                @Html.CheckBoxFor(m => m.Colors[i].Checked, new { id = "colors" })
+                                 @Html.HiddenFor(m => m.Colors[i].Text)
+                                <div style="background: @Model.Colors[i].Text; width: 100px; height: 15px; border:1px solid #A6A5A5; display: inline-block">
+                               
+                                    </div>                           
+                                <br/>
+                            }
+
+                        </div>
+                    </div>
+                </section>
+
+                <section class="sky-form">
+                    <h4 class="cate">Популярость</h4>
+                    <div class="row row1 scroll-pane">
+                        @for (int i = 0; i < @Model.Popularity.Count; i++)
+                        {
+
+                            @Html.CheckBoxFor(m => m.Popularity[i].Checked, new { id = "popularity" })
+                            @Html.HiddenFor(m => m.Popularity[i].Text)
+                            <img src="~/Content/images/layer/@Model.Popularity[i].Text" />
+                            <br/>
+                            <br/>
+                        }
+
+                    </div>
+       
+                </section>
+                    @Html.HiddenFor(m=>m.Subcategory)
+                    @Html.HiddenFor(m=>m.Catalog)
+                    <input type="submit" value="Поиск" />
+
+            }
+           
+            
+            @*<style src="~/Content/css/bootstrap.css"> </style>*@
+       </div>
+    
+               
+            </div>
+
+    </div>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/vendors")
+
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script>
+    $(function () {
+        $(':checkbox').on('change', function () {
+            $('#discountForm').trigger("submit");
+
+        });
+    })
+</script>

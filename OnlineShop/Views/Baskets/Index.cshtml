@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Корзина";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using OnlineShop.Models
+@model BasketViewModel
+
+<div class="container">
+    <div class="check-out">
+        <div class="bs-example4" data-example-id="simple-responsive-table">
+            <div class="table-responsive">
+                <table class="table-heading simpleCart_shelfItem">
+                    <tr>
+                        <th class="table-grid">Товар</th>
+
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Стоимость</th>
+                    </tr>
+                    @foreach (var item in Model.Orders)
+                    {
+                    <tr class="cart-header">
+
+                        <td class="ring-in">
+                            <a href="single.html" class="at-in"><img src="@item.Product.Images[0].Substring(1).Insert(0, "../..")" class="img-responsive" alt=""></a>
+                            <div class="sed">
+                                <h5>@Html.ActionLink(@item.Product.Title, "ProductInfo", "Products", new { id = @item.Product.Id.ToString() }, null)</h5>
+                                <p>(@item.Product.Description ) </p>
+
+                            </div>
+                            <div class="clearfix"> </div>
+                            <div class="close1"> </div>
+                        </td>
+                        <td>@item.Product.Price</td>
+                        <td>@item.Count</td>
+                        <td class="item_price">@item.Summ грн</td>
+                    </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <div class="produced">
+            <h4>Общая сумма: <b>@Model.Summ</b></h4>
+            <a href="single.html" class="hvr-skew-backward">Оформить заказ</a>
+        </div>
+    </div>
+</div>
+

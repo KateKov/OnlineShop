@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Домашняя страница";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using OnlineShop.Models
+@model IEnumerable<ProductViewModel>
+
+@Styles.Render("~/Content/home")
+@Scripts.Render("~/bundles/home")
+<div class="content-mid">
+    <h3>@Html.Label("Самые популярные") </h3>
+    <label class="line"></label>
+    
+        <div class="mid-popular">
+                @foreach (var item in Model)
+            {
+                    <div class="item">
+                        <div class="col-md-3 item-grid simpleCart_shelfItem item">
+                            <div class="mid-pop">
+                                <div class="pro-img">
+                                    <img class="img-responsiv" src="@item.Images[0].Substring(1).Insert(0, "../..")" alt="">
+                                    <div class="zoom-icon ">
+                                        <a class="picture b-link-stripe b-animate-go  thickbox" href="@item.Images[0].Substring(1)" rel="title" ><i class="glyphicon glyphicon-search icon "></i></a>
+                                        <a class="picture b-link-stripe b-animate-go  thickbox" href="@item.Id.ToString().Insert(0, "/Products/ProductInfo/")"><i class="glyphicon glyphicon-menu-right icon"></i></a>
+                                    </div>
+                                </div>
+                                <div class="mid-1">
+                                    <div class="women">
+                                        <div class="women-top">
+                                            <span>@item.Catalog </span>
+                                            <h6>@Html.ActionLink( @item.Title, "ProductInfo", "Products", new { id=@item.Id.ToString()}, null) </h6>
+                                        </div>
+                                        
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="mid-2">
+                                        <p>
+                                            @if (@item.Discount > 0)
+                                            {<label>@item.PriceWithoutDiscount грн</label>}<em class="item_price">@Html.DisplayFor(model => item.Price) грн</em>
+                                        </p>
+                                        <div class="block">
+                                            <div class="starbox small ghosting"> </div>
+                                        </div>
+                                        <div class="img item_add">
+                                            <a href="@item.Id.ToString().Insert(0, "/Products/ProductInfo/")"><img src="~/Content/images/layer/ca.png" alt=""></a>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        }
+                    </div>
+            </div>
+
+
+@section search{
+<div class="col-sm-2 search-right">
+
+    @using (Ajax.BeginForm("ProductSearch", "Home", new AjaxOptions { UpdateTargetId = "results" }))
+    {
+        <i class="glyphicon glyphicon-search"> </i>
+                    <input type="text" name="name" />
+                    <input type="submit" value="Поиск" />
+    }
+</div>
+
+    }

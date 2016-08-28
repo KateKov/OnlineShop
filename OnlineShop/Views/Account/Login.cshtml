@@ -1,0 +1,56 @@
+﻿
+
+@{
+    ViewBag.Title = "Вход";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using OnlineShop.Models
+
+@model LoginViewModel
+<div class="container">
+    <div class="login">
+
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
+            <div id="wrong">
+                <b>
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(false)
+                </b>
+            </div>
+
+            <br />
+                <br />
+            <div class="col-md-6 login-do">
+                @Html.DisplayNameFor(m => m.Email)
+                <div class="login-mail">
+                    @Html.TextBoxFor(m => m.Email)
+                    <i class="glyphicon glyphicon-envelope"></i>
+                </div>
+                @Html.DisplayNameFor(m => m.Password)
+                <div class="login-mail">
+                    @Html.PasswordFor(m => m.Password)
+                    <i class="glyphicon glyphicon-lock"></i>
+                </div>
+                <label class="hvr-skew-backward">
+                    <input type="submit" value="login">
+                </label>
+       
+            </div>
+           }
+            <div class="col-md-6 login-right">
+
+                <p>
+                  Если Вы еще не зарегистрировались, пройдите по ссылке
+                </p>
+                @Html.ActionLink("Зарегистрироваться", "Register", null, new { @class = "hvr-skew-backward" })
+
+            </div>
+
+            <div class="clearfix"> </div>
+        </form>
+    </div>
+
+</div>
+<div class="blank"></div>

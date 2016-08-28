@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Информация о товаре";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@using OnlineShop.Models
+@model ProductViewModel
+
+<div class="container">
+    <div class="col-md-9">
+       
+        <div class="col-md-5 grid">
+            <div class="flexslider">
+                <ul class="slides">
+                    
+                    @for (int i = 0; i < @Model.Images.Count; i++)
+                    {
+
+                            <div class="thumb-image"> <img src="@Model.Images[i].Substring(1).Insert(0, "../..")" data-imagezoom="true" class="img-responsive"> </div>
+
+                    }
+</ul>
+            </div>
+        </div>
+        <div class="col-md-7 single-top-in">
+            <div class="span_2_of_a1 simpleCart_shelfItem">
+                <h3>@Model.Title</h3>
+                <p class="in-para"> @Model.Description</p>
+                <div class="price_single">
+                    <span class="reducedfrom item_price">@Model.Price</span>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="quantity">
+                    <div class="quantity-select">
+                       @using (Html.BeginForm("AddToBasket", "Baskets", FormMethod.Post)) {
+                           @Html.HiddenFor(m => m.Id)
+                           @Html.HiddenFor(m=>m.Price)
+                        @Html.TextBoxFor(m => m.OrderCount, new { @value = Model.OrderCount, @class="ordercount" })
+                         <input type="submit" />
+                       }
+                       
+                    </div>
+                </div>
+                <!--quantity-->
+              
+                <!--quantity-->
+
+                
+                <div class="clearfix"> </div>
+            </div>
+
+        </div>
+        <div class="clearfix"> </div>
+        <!---->
+        <div class="tab-head">
+            <nav class="nav-sidebar">
+                <ul class="nav tabs">
+                    <li class="active"><a href="#tab1" data-toggle="tab">Описание</a></li>
+                </ul>
+            </nav>
+            <div class="tab-content one">
+                <div class="tab-pane active text-style" id="tab1">
+                    <div class="facts">
+                        <p> @Model.Description
+                            </p>
+                        <p>Состав: @Model.Materials</p>
+                       
+                    </div>
+
+                </div>
+                
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!---->
+    </div>
+    <!----->
+    </div>
