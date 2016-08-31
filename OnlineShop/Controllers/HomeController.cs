@@ -24,9 +24,9 @@ namespace OnlineShop.Controllers
         }
         public ActionResult Index()
         {
-            var products = _productsRepository.GetAll().OrderByDescending(m => m.Popularity).Take(8).ToList();
+            var products = _productsRepository.GetAll().Where(x=>x.Amount>0).OrderByDescending(m => m.Popularity).Take(8).ToList();
             IEnumerable<ProductViewModel> viewModelProducts = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
-
+            
             return View(viewModelProducts);
         }
         [HttpPost]

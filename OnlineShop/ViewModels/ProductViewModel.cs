@@ -24,7 +24,7 @@ namespace OnlineShop.Models
         public Guid CatalogId { get; set; }
         public string Catalog { get; set; }
 
-        [Required(ErrorMessage = "Введите сабкатегорию")]
+        [Required(ErrorMessage = "Введите подкатегорию")]
         public Guid SubcategoryId { get; set; }
         public string Subcategory { get; set; }
         [Required(ErrorMessage = "Введите размер")]

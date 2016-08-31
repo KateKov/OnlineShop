@@ -29,3 +29,4 @@ C:\Users\kater_000\Videos\epam\OnlineShop\OnlineShop.DAL\bin\Debug\ru\Microsoft.
 C:\Users\kater_000\Videos\epam\OnlineShop\OnlineShop.DAL\bin\Debug\ru\Microsoft.AspNet.Identity.Owin.resources.dll
 C:\Users\kater_000\Videos\epam\OnlineShop\OnlineShop.DAL\obj\Debug\OnlineShop.DAL.dll
 C:\Users\kater_000\Videos\epam\OnlineShop\OnlineShop.DAL\obj\Debug\OnlineShop.DAL.pdb
+C:\Users\kater_000\Videos\epam\OnlineShop\OnlineShop.DAL\obj\Debug\OnlineShop.DAL.csprojResolveAssemblyReference.cache

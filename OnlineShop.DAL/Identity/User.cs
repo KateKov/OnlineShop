@@ -18,9 +18,13 @@ namespace OnlineShop.DAL.Entities
         [Required]
         public string LastName { get; set; }
 
+        public bool IsBlocked { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            userIdentity.AddClaim(new Claim("lastname", this.LastName.ToString()));
+            userIdentity.AddClaim(new Claim("firstname", this.FirstName.ToString()));
+            userIdentity.AddClaim(new Claim("isblocked", this.IsBlocked.ToString()));
             return userIdentity;
         }
     }

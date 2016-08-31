@@ -28,10 +28,12 @@ namespace OnlineShop.Controllers
             _basket = (_basketsRepository.GetAll().ToList().Count!=0)?_basketsRepository.GetAll().First():new Basket() { Id= Guid.NewGuid()};
         }
         [HttpPost]
+        [Authorize]
         public ActionResult AddToBasket(ProductViewModel product)
         {
             OrderProduct orderProduct;
-            var orderbuf = _basket.OrderProducts.Where(x => x.Product == _productsRepository.Get(product.Id)).ToList();
+            Product productChanged = _productsRepository.Get(product.Id);
+            var orderbuf = _basket.OrderProducts.Where(x => x.Product == productChanged).ToList();
             if (orderbuf.Count != 0)
             {
                 orderProduct = orderbuf.First();
@@ -43,7 +45,8 @@ namespace OnlineShop.Controllers
                 orderProduct = new OrderProduct() { Id = Guid.NewGuid(), Product = _productsRepository.Get(product.Id), Count = product.OrderCount };
                 _orderProducts.Create(orderProduct);
             }
-            
+            productChanged.Amount -= product.OrderCount;
+            _productsRepository.Update(productChanged);
             _basket.OrderProducts.Add(orderProduct);
 
             if (_basketsRepository.Get(_basket.Id) != null) {
@@ -53,22 +56,53 @@ namespace OnlineShop.Controllers
             return RedirectToAction("Index");
 
         }
-        // GET: Basket
-        public ActionResult Index()
+        [Authorize]
+        public ActionResult DeleteProduct(string id)
         {
-            
-            List<OrderViewModel> orderViewModels = new List<OrderViewModel>();
-            foreach(var item in _basket.OrderProducts.ToList())
+            if (_basket.OrderProducts.Count > 0)
             {
 
-                Product product = item.Product;
-                ProductViewModel viewModelProduct = Mapper.Map<Product, ProductViewModel>(product);
-                orderViewModels.Add(new OrderViewModel() { Count = item.Count, Product = viewModelProduct, Summ=OrderModel.Summ(viewModelProduct, item.Count) });
+                Guid productId = Guid.Parse(id);
+                Product productChanged = _productsRepository.Get(productId);
+
+                var deletedOrder = _orderProducts.GetAll().Where(x => x.Product.Id == productId).ToList();
+                if (deletedOrder.Count > 0)
+                {
+                    productChanged.Amount += deletedOrder.First().Count;
+                    _productsRepository.Update(productChanged);
+                    _orderProducts.Delete(deletedOrder.First());
+                    _basket.OrderProducts.Remove(deletedOrder.First());
+                  
+                }
+                return RedirectToAction("Index");
             }
-            BasketViewModel basket = new BasketViewModel() { Orders = orderViewModels };
-            _basket.Summ = basket.Summ;
-            _basketsRepository.Update(_basket);
-            return View(basket);
+            return HttpNotFound();
+        }
+        // GET: Basket
+        [Authorize]
+        public ActionResult Index()
+        {
+            if (_basket.OrderProducts.Count>0)
+            {
+                List<OrderViewModel> orderViewModels = new List<OrderViewModel>();
+           
+                foreach (var item in _basket.OrderProducts.ToList())
+                {
+
+                    Product product = item.Product;
+                    ProductViewModel viewModelProduct = Mapper.Map<Product, ProductViewModel>(product);
+                    orderViewModels.Add(new OrderViewModel() { Count = item.Count, Product = viewModelProduct, Summ = OrderModel.Summ(viewModelProduct, item.Count) });
+                }
+                BasketViewModel basket = orderViewModels != null ? new BasketViewModel() { Orders = orderViewModels, Summ = BasketModel.Summ(orderViewModels) } : new BasketViewModel();
+                _basket.Summ = basket.Summ;
+                _basketsRepository.Update(_basket);
+                return View(basket);
+            }
+            else
+            {
+                return View(new BasketViewModel());
+            }
+            
         }
     }
 }

@@ -1,0 +1,73 @@
+﻿
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+
+    <title>
+        Панель администратора</title>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <meta name="viewport" content="width=device-width" />
+
+        @Styles.Render("~/Content/admin")
+
+    @Scripts.Render("~/bundles/admin")
+
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar" data-background-color="white" data-active-color="danger">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+
+                    Панель администратора
+
+                </div>
+                <ul class="nav">
+                    <li class="active">
+                        <i class="ti-panel"></i>
+                        @Html.ActionLink("Статистика", "Index")
+                           
+                       
+                    </li>
+                    <li>
+                        <i class="ti-user"></i>
+                        @Html.ActionLink("Пользователи", "Index", "Users")
+                            
+                          
+                        
+                    </li>
+                    <li>
+                        <i class="ti-bag"></i>
+                        @Html.ActionLink("Товары", "Index", "Products")
+                           
+                            
+                    </li>
+                    <li>
+                        <i class="ti-shopping-cart"></i>
+                        @Html.ActionLink("Заказы", "Index", "Purchases")
+
+                        
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+           
+            @RenderBody()
+            <footer class="footer">
+                <div class="container-fluid">
+                    
+                    <div class="copyright pull-right">
+                        &copy;
+                        <script>document.write(new Date().getFullYear())</script>, Коваленко Е.В.</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+</body>
+@*@Scripts.Render("~/bundles/admin")*@
+</html>

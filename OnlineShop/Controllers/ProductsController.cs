@@ -52,7 +52,7 @@ namespace OnlineShop.Controllers
 
             return View(catalogViewModel);
         }
-        [Authorize(Roles="admin")]
+
         [HttpGet]
         public ActionResult ProductInfo(string id)
         {
@@ -125,7 +125,7 @@ namespace OnlineShop.Controllers
         }
         private List<Product> GetProductsBySubcategory(string catalog, string subcategory)
         {
-            return _productsRepository.GetAll().Where(p => p.Subcategory.Category.Catalog.Title == catalog).Where(p => p.Subcategory.Title == subcategory).OrderBy(p=>p.Popularity).ToList();
+            return _productsRepository.GetAll().Where(p=>p.Amount>0).Where(p => p.Subcategory.Category.Catalog.Title == catalog).Where(p => p.Subcategory.Title == subcategory).OrderBy(p=>p.Popularity).ToList();
         }
         private bool IsNotChecked(CatalogViewModel catalogViewModel)
         {

@@ -14,6 +14,11 @@
 	font-family:'Oxygen-Regular';
 	src:url(../fonts/Oxygen-Regular.ttf) format('truetype');
 }
+.cart-header .ring-in input {
+    background: url(../../Content/images/layer/close.png) !important;
+    width:23px !important;
+    height: 23px !important;
+}
 .orderproduct{
     width: 20px;
 }

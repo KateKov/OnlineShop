@@ -46,8 +46,9 @@ namespace OnlineShop.DAL.Infrastracture
         }
         public virtual void Delete(T entity)
         {
-            DbEntityEntry dbEntityEntry = db.Entry<T>(entity);
-            dbEntityEntry.State = EntityState.Deleted;
+            db.Set<T>().Remove(entity);
+            db.SaveChanges();
+            
         }
 
 

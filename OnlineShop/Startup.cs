@@ -22,7 +22,9 @@ namespace OnlineShop
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
             });
-
+            //app.UseFacebookAuthentication(
+            //   appId: "592200494293334",
+            //   appSecret: "b901da5d74ac2243289ee1c7ec8262a4");
         }
     }
 }

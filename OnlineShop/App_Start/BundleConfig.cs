@@ -8,9 +8,17 @@ namespace OnlineShop
         
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/home").Include(
-                "~/Scripts/vendors/owl.carousel.js"
-                ));
+            bundles.Add(new ScriptBundle("~/bundles/admin").Include(
+                "~/Scripts/admin/jqery.dataTables.min.js",
+                 "~/Scripts/vendors/jquery-1.12.4.js",
+                "~/Scripts/vendors/paper-dashboard.js",
+                "~/Scripts/vendors/jquery-ui-1.12.0.js",
+                "~/Scripts/jquery.jqGrid.min.js",
+               "~/Scripts/vendors/bootstrap.min.js",
+                "~/Scripts/admin/bootstrap-checkbox-radio.js",
+                "~/Scripts/admin/bootstrap-notify.js",
+                "~/Scripts/admin/chartist.min.js",
+                "~/Scripts/admin/demo.js"));
             bundles.Add(new ScriptBundle("~/bundles/vendors").Include(
                 "~/Scripts/vendors/jquery.js",
                 "~/Scripts/vendors/bootstrap.min.js",
@@ -19,7 +27,7 @@ namespace OnlineShop
                 "~/Scripts/vendors/jquery-ui.min.js",
                 "~/Scripts/vendors/jquery.unobtrusive-ajax.js",
                 "~/Scripts/vendors/jquery-ui-1.12.0.min.js",
-                "~/Scripts/vendors/jquery-1.11.1.min.js",
+                "~/Scripts/vendors/jquery-1.12.4.min.js",
                 "~/Scripts/vendors/jquery.chocolate.js",
                 "~/Scripts/vendors/jquery.etalage.min.js",
                 "~/Scripts/vendors/jquery.flexslider.js",
@@ -32,7 +40,16 @@ namespace OnlineShop
                 "~/Scripts/vendors/modernizr.custom.72111.js",
                 "~/Scripts/vendors/simpleCart.min.js",
                 "~/Scripts/vendors/uisearch.min.js"));
-
+            bundles.Add(new StyleBundle("~/Content/admin").Include(
+                "~/Content/css/jquery.dataTables.min.css",
+                "~/Content/css/animate.min.css",
+                "~/Content/css/bootstrap.min.css",
+                "~/Content/css/demo.css",
+                "~/Content/css/paper-dashboard.css",
+                "~/Content/css/themify-icons.css",
+                "~/Content/css/font-awesome.min.css",
+                "~/Content/themes/base/jquery.ui.all.css",
+                "~/Content/jquery.jqGrid/ui.jqgrid.css"));
             bundles.Add(new StyleBundle("~/Content/menu").Include(
                 "~/Content/css/megamenu.css",
                  "~/Content/css/bootstrap.css",
@@ -51,8 +68,6 @@ namespace OnlineShop
                       "~/Content/css/megamenu.css",
                       "~/Content/css/popuo-box.css",
                       "~/Content/css/style4.css"));
-            bundles.Add(new StyleBundle("~/Content/home").Include(
-                "~/Content/css/owl.carousel.css"));
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/app/app.js"));
         }

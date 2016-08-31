@@ -26,6 +26,10 @@
         <div class="col-md-7 single-top-in">
             <div class="span_2_of_a1 simpleCart_shelfItem">
                 <h3>@Model.Title</h3>
+                 @if(Model.Amount<=0)
+                 {
+                     <h3>Нет на складе </h3>
+                 }
                 <p class="in-para"> @Model.Description</p>
                 <div class="price_single">
                     <span class="reducedfrom item_price">@Model.Price</span>
@@ -36,7 +40,7 @@
                        @using (Html.BeginForm("AddToBasket", "Baskets", FormMethod.Post)) {
                            @Html.HiddenFor(m => m.Id)
                            @Html.HiddenFor(m=>m.Price)
-                        @Html.TextBoxFor(m => m.OrderCount, new { @value = Model.OrderCount, @class="ordercount" })
+                        @Html.TextBoxFor(m => m.OrderCount, new { @value = Model.OrderCount, @class="ordercount", @min=1, @max=Model.Amount, @onchange = "isright(this);", @style="width:40px" })
                          <input type="submit" />
                        }
                        
@@ -78,3 +82,12 @@
     </div>
     <!----->
     </div>
+<script>
+function isright(obj)
+ {
+ var value= +obj.value.replace(/\D/g,'')||0;
+ var min = +obj.getAttribute('min');
+ var max = +obj.getAttribute('max');
+ obj.value = Math.min(max, Math.max(min, value));
+ }
+</script>

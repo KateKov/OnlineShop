@@ -1,0 +1,130 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@*@using OnlineShop.Areas.Admin.ViewModels
+@model IEnumerable<ProductsTableViewModel>*@
+
+   <div style="background-color: #F5F5F5"; padding: 20px">
+       <h5>Название @Html.TextBox("Title", "", new { @id = "txtTitle" }) <input type="button" value="Искать" id="btnSearch" /></h5>
+      
+
+                       
+                       @Html.DropDownList("Catalog",new SelectList(ViewBag.Catalogs), "Выберите каталог", new { @id="ddCatalot", @style="width:200px"})
+
+
+                       @Html.DropDownList("Category", new SelectList(ViewBag.Categories) , "Выберите категорию", new { @id = "ddCategory", @style = "width:200px" })
+
+
+                       @Html.DropDownList("Subcategory", new SelectList(ViewBag.Subcategories), "Выберите подкатегорию", new { @id = "ddSubcategory", @style = "width:200px" })
+
+
+                       @Html.DropDownList("Brand", new SelectList(ViewBag.Brands), "Выберите бренд", new { @id = "ddBrand", @style = "width:200px" })
+       
+                  
+      
+   </div>     
+
+   <div id="TableContainer">
+       <table id="ProductsTable" class="table table-responsive table-striped">
+           <thead>
+               <tr>
+                   <th>Id </th>
+                   <th>Название</th>
+                   <th>Цена</th>
+                   <th>Количество</th>
+                   <th>Цвет</th>
+                   <th>Коллекция</th>
+                   <th>Бренд</th>
+                   <th>Каталог</th>
+                   <th>Категория</th>
+                   <th>Подкатегория</th>
+                   <th>Описание</th>
+                   <th>Состав</th>
+                   <th>Популярность</th>
+                   <th>Скидка</th>
+                   <th>Размеры</th>
+                   
+                  
+                   
+               </tr>
+           </thead>
+       </table>
+   </div>
+<style>
+    tr.even{
+        background-color: #6c6969 !important;
+        color:aliceblue; 
+    }
+    tr.odd{
+        background-color: #a39c9c !important;
+        color: black; 
+    }
+    table{
+        font-size: 14px;
+
+    }
+     th{ background-color: rgba(183, 33, 33, 0.82) !important; color: #191313}
+</style>
+   
+    <script type="text/javascript">
+        var editor;
+        $(document).ready(function () {
+            $("#ProductsTable").DataTable({
+                "processing":true,
+                "serverSide": true,
+                "orderMulti": false,
+                "fixedHeader": true,
+                "scrollX": true,
+                "scrollCollapse": true,
+                "scrollY": "450px",
+                "fixedColumns": {"leftColumns":2},
+                "dom": '<"top"i>rt<"bottom"lp><"clear">',
+                "ajax": {
+                    "url": "@Url.Action("LoadData")",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns": [
+                     {
+                         "sortable": false,
+                         "render": function (o) { return '<span class="glyphicons glyphicons-pencil" style="font-size: 22px;" data-original-title="Edit">></span><span class="glyphicons glyphicons-remove-circle" style="font-size: 22px;" data-original-title="Delete"></span>'; }
+                     },
+                    { "data": "Id","name":"Id", "autowidth": true },//index 0
+                    { "data": "Title", "name": "Title", "autowidth": true },//index 1
+                    { "data": "Price", "name": "Price", "autowidth": true },//index 2
+                    { "data": "Amount", "name": "Amount", "autowidth": true },//index 3
+                    { "data": "Color", "name": "Color", "autowidth": true },//index 4
+                    { "data": "Collection", "name": "Collection", "autowidth": true },//index 5
+                    { "data": "Brand", "name": "Brand", "autowidth": true },//index 6
+                    { "data": "Catalog", "name": "Catalog", "autowidth": true },//index 7
+                    { "data": "Category", "name": "Category", "autowidth": true },//index 8
+                    { "data": "Subcategory", "name": "Subcategory", "autowidth": true },//index 9
+                    { "data": "Description", "name": "Description", "autowidth":true },//index 10
+                    { "data": "Materials", "name": "Materials", "autowidth": true },//index 11
+                    { "data": "Popularity", "name": "Popularity", "autowidth": true },//index 12
+                    { "data": "Discount", "name": "Discount", "autowidth": true },//index 13
+                    { "data": "Sizes", "name": "Sizes", "autowidth": true }//index 14
+                    
+
+                ]
+            });
+        
+         
+        oTable = $('#ProductsTable').DataTable();
+        $('#btnSearch').click(function () {
+            
+            oTable.columns(1).search($('#txtTitle').val());
+           
+            oTable.columns(7).search($('#ddCatalog').val());
+            oTable.columns(8).search($('#ddCategory').val());
+
+            oTable.columns(9).search($('#ddSubcategory').val());
+            oTable.columns(6).search($('#ddBrand').val());
+            oTable.draw();
+        });
+       
+        });
+    </script>
+
+

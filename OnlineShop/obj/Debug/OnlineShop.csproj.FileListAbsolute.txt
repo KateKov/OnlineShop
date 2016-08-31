@@ -119,3 +119,4 @@ C:\Users\kater_000\Videos\epam\OnlineShop\OnlineShop\bin\ru\Microsoft.Owin.Secur
 C:\Users\kater_000\Videos\epam\OnlineShop\OnlineShop\bin\ru\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
 C:\Users\kater_000\Videos\epam\OnlineShop\OnlineShop\obj\Debug\OnlineShop.dll
 C:\Users\kater_000\Videos\epam\OnlineShop\OnlineShop\obj\Debug\OnlineShop.pdb
+C:\Users\kater_000\Videos\epam\OnlineShop\OnlineShop\bin\System.Linq.Dynamic.dll
